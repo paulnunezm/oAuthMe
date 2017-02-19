@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AuthMe.iml" filepath="$PROJECT_DIR$/AuthMe.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/oauthathenticator/oauthathenticator.iml" filepath="$PROJECT_DIR$/oauthathenticator/oauthathenticator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oauthme/oauthme.iml" filepath="$PROJECT_DIR$/oauthme/oauthme.iml" />
     </modules>
   </component>
 </project>

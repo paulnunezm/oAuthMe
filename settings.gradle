@@ -1,1 +1,1 @@
-include ':app', ':oauthathenticator'
+include ':app', ':oauthme'
