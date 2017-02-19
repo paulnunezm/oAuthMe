@@ -67,7 +67,7 @@ public class MainActivity extends  AppCompatActivity implements com.nunez.oautha
           .requestTokenUrl(ApiConstants.REQUEST_TOKEN_URL)
           .accessTokenUrl(ApiConstants.ACCESS_TOKEN_URL)
           .authorizeUrl(ApiConstants.AUTHORIZE_URL)
-          .callbackUrl(CALLBACK_URL)
+          .callbackUrl(BuildConfig.CALLBACK_URL)
           .listener(this)
           .build();
 
