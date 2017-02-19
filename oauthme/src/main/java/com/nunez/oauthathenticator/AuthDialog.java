@@ -1,6 +1,5 @@
 package com.nunez.oauthathenticator;
 
-import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +17,6 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 
 import javax.annotation.Nonnull;
-
-import static android.content.ContentValues.TAG;
-import static com.facebook.stetho.inspector.network.ResponseHandlingInputStream.TAG;
 
 /**
  * Created by paulnunez on 2/14/17.
@@ -61,22 +56,12 @@ public class AuthDialog extends DialogFragment implements DialogWebClient.onAuth
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.dialog_webview, container, false);
 
-    getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-    getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-    setStyle(DialogFragment.STYLE_NO_FRAME, android.R.style.Theme);
-
     WebView webView = (WebView) view.findViewById(R.id.webView);
-
-    webView.loadUrl(getArguments().getString("requestToken"));
-    webView.getSettings().setAllowContentAccess(true);
-
-    WebSettings webSettings = webView.getSettings();
-    webSettings.setJavaScriptEnabled(true);
-
-    // Force links and redirects to open in the WebView instead of in a browser
-    webView.setWebViewClient(new DialogWebClient(this, getArguments().getString("callbackUrl")));
-
     ImageButton closeBtn = (ImageButton) view.findViewById(R.id.imageButton);
+
+    setupDialog();
+    setupWebView(webView);
+
     closeBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -85,6 +70,23 @@ public class AuthDialog extends DialogFragment implements DialogWebClient.onAuth
     });
 
     return view;
+  }
+
+  private void setupDialog() {
+    getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+    getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    setStyle(DialogFragment.STYLE_NO_FRAME, android.R.style.Theme);
+  }
+
+  private void setupWebView(WebView webView) {
+    webView.loadUrl(getArguments().getString("requestToken"));
+    webView.getSettings().setAllowContentAccess(true);
+
+    WebSettings webSettings = webView.getSettings();
+    webSettings.setJavaScriptEnabled(true);
+
+    // Force links and redirects to open in the WebView instead of in a browser
+    webView.setWebViewClient(new DialogWebClient(this, getArguments().getString("callbackUrl")));
   }
 
   @Override
