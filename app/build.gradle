@@ -28,6 +28,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':oauthme')  // this one adds okhttp
 
+    compile 'se.akerfeldt:okhttp-signpost:1.1.0'
+
     // Square
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-simplexml:2.1.0'
