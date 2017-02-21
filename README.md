@@ -11,7 +11,7 @@ Then the activity where you want to perform the authorization
 must extend ```AppCompact``` and build a
 new Authenticator object with the respective parameters:
 
-```
+``` java
  authenticator = new com.nunez.oauthathenticator.Authenticator.Builder()
           .consumerKey(API_KEY)
           .consumerSecret(API_SECRET)
@@ -32,7 +32,7 @@ needed to let the user(via browser) grant authorization to the app.
 After the requestToken is received in the ```onRequestTokenReceived``` listener we can
 launch the webview dialog fragment to let the user grant the autorization:
 
-```
+``` java
 @Override
 public void onRequestTokenReceived(String authorizationUrl, String requestToken, String requestTokenSecret) {
 
@@ -45,9 +45,9 @@ public void onRequestTokenReceived(String authorizationUrl, String requestToken,
 
 When the user gives the authorization the ```onAuthorizationTokenReceived``` will be called
 providing us with an authorization token that will be used to request the users key and secret keys
-using ``` authenticator.getUserSecretKeys(authToken);```:
+using ```authenticator.getUserSecretKeys(authToken);```
 
-```
+``` java
 @Override
   public void onAuthorizationTokenReceived(Uri authToken) {
     // Now we can request the users keys
@@ -67,7 +67,7 @@ To contribute just make a pull request and create a new branch with your changes
 
 ###License
 ```
-Copyright 2017 Paul Núñez \
+Copyright 2017 Paul Núñez
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
