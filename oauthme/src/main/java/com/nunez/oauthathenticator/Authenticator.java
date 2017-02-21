@@ -1,6 +1,7 @@
 package com.nunez.oauthathenticator;
 
 import android.net.Uri;
+import android.util.Log;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
@@ -13,6 +14,8 @@ import oauth.signpost.basic.DefaultOAuthProvider;
 
 public class Authenticator implements GetRequestTokenAsyncTask.onRequestTokenListener,
     GetUserSecretAsyncTask.GetUserSecretListener {
+
+  private static final String TAG = "Authenticator";
 
   private String                consumerKey; //api_key
   private String                consumerSecret; // api_secret
@@ -52,6 +55,8 @@ public class Authenticator implements GetRequestTokenAsyncTask.onRequestTokenLis
    * Gets the requestToken(authorization url) to be used to let the user
    * grant permissions to the app. This authorization url must be opened on a browser
    * via an intent or webView.
+   *
+   * And the requestToken, requestTokenSecret to perform call signing.
    */
   public void getRequestToken() {
 
@@ -72,16 +77,17 @@ public class Authenticator implements GetRequestTokenAsyncTask.onRequestTokenLis
 
 
   // Asynck task callbacks
-  @Override
-  public void onRequestTokenReceived(String requestToken) {
-    // With this you can open a webview or browser to let the user grant the permission.
 
-    this.requestToken = requestToken;
+  @Override
+  public void onRequestTokenReceived(String authorizationUrl) {
+    this.requestToken = authorizationUrl;
+
+    Log.i(TAG, "onRequestTokenReceived: "+requestToken);
+    Log.i(TAG, "onRequestTokenReceived2: "+consumer.getToken()+"\n"+consumer.getTokenSecret());
 
     // sendiing it back so it can be saved it as preferred.
-    listener.onRequestTokenReceived(requestToken);
+    listener.onRequestTokenReceived(authorizationUrl, consumer.getToken(), consumer.getTokenSecret());
   }
-
   @Override
   public void onUserSecretReceived(String userKey, String userSecret) {
     // sending it back so it can be saved it as preferred.
@@ -93,11 +99,12 @@ public class Authenticator implements GetRequestTokenAsyncTask.onRequestTokenLis
   public interface AuthenticatorListener {
 
     /**
-     * Called when Authenticator receives the requestToken, now you can store it
-     * and open it in a browser to request the userKey and userSecret.
+     * Called when Authenticator receives the AuthorizationUrl, requestToken and requestTokenSecret,
+     * now you can store it and open it in a browser to request the userKey and userSecret.
+     *
      * @param requestToken The request token received.
      */
-    void onRequestTokenReceived(String requestToken);
+    void onRequestTokenReceived(String authorizationUrl, String requestToken, String requestTokenSecret);
 
     /**
      * Called when the Authenticator receives the user key & secret.

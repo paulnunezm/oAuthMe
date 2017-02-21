@@ -22,7 +22,7 @@ public class GetRequestTokenAsyncTask extends AsyncTask<Object, Void, Void> {
   private onRequestTokenListener onRequestTokenReceivedListener;
 
   public interface onRequestTokenListener {
-    void onRequestTokenReceived(String requestToken);
+    void onRequestTokenReceived(String authorizationUrl);
   }
 
 
