@@ -1,5 +1,7 @@
 package com.nunez.authme;
 
+import com.nunez.authme.model.GoodreadsResponse;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -9,5 +11,5 @@ import retrofit2.http.GET;
 
 public interface GoodreadsApi {
  @GET("api/auth_user")
-  Call<UserWhoAuthorizedResponse> getUserNameAndId();
+  Call<GoodreadsResponse> getUserNameAndId();
 }
