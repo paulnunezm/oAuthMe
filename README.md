@@ -23,9 +23,9 @@ new Authenticator object with the respective parameters:
           .build();
 ```
 
-The activity must implement ```java Authenticator.AuthenticatorListener``` and ```java AuthDialog.RequestListener```.
+The activity must implement ```Authenticator.AuthenticatorListener``` and ```AuthDialog.RequestListener```.
 
-Now you can call ```java authenticator.getRequestToken();``` to request the authorization url(requestToken)
+Now you can call ```authenticator.getRequestToken();``` to request the authorization url(requestToken)
 needed to let the user(via browser) grant authorization to the app.
 
 After the requestToken is received in the ```onRequestTokenReceived``` listener we can
